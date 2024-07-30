@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        thead {
+            background-color: #333;
+        }
+
+        thead th {
+            padding: 10px;
+            text-align: left;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #444;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: #333;
+        }
+
+        tbody td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .easy {
+            color: lightgreen;
+        }
+
+        .medium {
+            color: yellow;
+        }
+
+        .hard {
+            color: red;
+        }
+
+        .material-icons {
+            font-size: 1.2em;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Status</th>
+        <th>Title</th>
+        <th>Solution</th>
+        <th>Acceptance</th>
+        <th>Difficulty</th>
+        <th>Frequency</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${items}">
+        <td><span class="material-icons">event</span></td>
+        <td th:text="${item.title}">Title</td>
+        <td><span class="material-icons" th:text="${item.solutionIcon}"></span></td>
+        <td th:text="${item.acceptance}">Acceptance</td>
+        <td th:classappend="${item.difficulty.name().toLowerCase()} " th:text="${item.difficulty}">Difficulty</td>
+        <td>
+            <span class="material-icons" th:text="${item.frequency ? 'key' : 'lock'}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

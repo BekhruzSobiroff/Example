@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="exampleForm" action="/admin" method="post">
+    <input type="text" name="title" placeholder="sarlavhani kiriting: ">
+    <br><br>
+    <input name="difficulty" list="difficulty" placeholder="Darajalarni tanlang">
+    <datalist id="difficulty">
+        <option value="HARD" style="color: red; background-color: red">HARD</option>
+        <option value="MEDIUM" style="color: yellow; background-color: yellow">MEDIUM</option>
+        <option value="EASY" style="color: green; background-color: green">EASY</option>
+    </datalist>
+    <br><br><br>
+    <button type="submit">Tasdiqlash</button>
+</form>
+<br>
+<div id="successMessage" style="display:none; color: green;">Successful</div>
+<script>
+    document.getElementById("exampleForm").addEventListener("submit", function(event){
+        event.preventDefault(); // Formani yuborishni to'xtatadi
+        var form = event.target;
+        var formData = new FormData(form);
+        fetch(form.action, {
+            method: form.method,
+            body: formData
+        }).then(response => {
+            if (response.ok) {
+                document.getElementById("successMessage").style.display = "block";
+                setTimeout(function() {
+                    document.getElementById("successMessage").style.display = "none";
+                }, 3000); // 3 soniyadan keyin xabarni yashiradi
+            }
+        }).catch(error => {
+            console.error("Error:", error);
+        });
+    });
+</script>
+</body>
+</html>
